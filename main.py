@@ -9,10 +9,8 @@ import os
 import random
 import wikipedia
 import base64
-import arrow
 import urllib
 import urllib2
-import time
 import redis
 import requests as req
 reload(sys)
