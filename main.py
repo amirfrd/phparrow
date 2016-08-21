@@ -894,10 +894,7 @@ def check(m):
         return
     if str(m.from_user.id) == is_sudo:
         msm = rediss.scard('member')
-        mesg = rediss.get('hash')
-        music = rediss.get('music')
-        spotify = rediss.get('spotify')
-        bot.send_message(m.chat.id, 'Users : `{}`\n\n*messages* : {}\n\n*SoundCloud Send Music* : `{}`\n\n*Spotify Send Music* : `{}`'.format(msm,mesg,music,spotify), parse_mode='Markdown')
+        bot.send_message(m.chat.id, 'Users : `{}`'.format(msm), parse_mode='Markdown')
 
 @bot.message_handler(regexp='^(/mean) (.*)')
 def mean(m):
@@ -1422,14 +1419,6 @@ def m(m):
 def us(m):
     banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
-        if m.chat.type == "private":
-            try:
-                hash = 'hash'
-                now = rediss.get(hash)
-                new = int(now) + 1
-                rediss.set(hash,new)
-            except :
-                print 'not'
         if m.chat.type == "private":
             if m.forward_from:
                 name = m.forward_from.first_name
